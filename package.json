@@ -1,0 +1,37 @@
+{
+	"private": true,
+	"name": "hardware-sdk-ledger",
+	"version": "0.0.1",
+	"description": "Cross-Platform Ledger Utilities for ARK Applications.",
+	"main": "index.js",
+	"author": "sleepdefic1t <sleepdefic1t@users.noreply.github.com>",
+	"license": "MIT",
+	"engineStrict": true,
+	"engines": {
+		"node": "^12 || ^14",
+		"yarn": "^2"
+	},
+	"scripts": {
+		"build": "yarn build:app && yarn build:transport",
+		"build:app": "yarn workspace ledger-app-ark run build",
+		"build:transport": "yarn workspace ledger-transport-ark run build",
+		"test:transport": "yarn workspace ledger-transport-ark run test",
+		"test:e2e": "jest --runInBand --detectOpenHandles"
+	},
+	"devDependencies": {
+		"@sindresorhus/tsconfig": "^0.7.0",
+		"@types/jest": "^25.2.3",
+		"@types/node": "^14.0.5",
+		"@yarnpkg/pnpify": "^2.0.0-rc.22",
+		"@zondax/zemu": "^0.2.4",
+		"jest": "^26.0.1",
+		"jest-extended": "^0.11.5",
+		"jest-serial-runner": "^1.1.0",
+		"ledger-transport-ark": "workspace:packages/ledger-transport-ark",
+		"ts-jest": "^26.0.0",
+		"typescript": "^3.9.3"
+	},
+	"workspaces": [
+		"packages/*"
+	]
+}

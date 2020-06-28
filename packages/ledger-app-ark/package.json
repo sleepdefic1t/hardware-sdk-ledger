@@ -1,0 +1,11 @@
+{
+	"name": "ledger-app-ark",
+	"version": "2.1.0",
+	"description": "A simple Ledger NanoS/NanoX app for the ARK Blockchain.",
+	"main": "/dist",
+	"author": "sleepdefic1t <sleepdefic1t@users.noreply.github.com>",
+	"license": "MIT",
+	"scripts": {
+		"build": "bash ./scripts/docker_build.sh"
+	}
+}

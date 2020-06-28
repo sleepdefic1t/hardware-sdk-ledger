@@ -1,0 +1,44 @@
+name: Test
+
+on:
+    push:
+        branches:
+            - "master"
+            - "develop"
+    pull_request:
+        types: [ready_for_review, synchronize, opened]
+
+jobs:
+    sdk:
+        runs-on: ubuntu-latest
+
+        strategy:
+            matrix:
+                node-version: [12.x]
+
+        steps:
+            - uses: actions/checkout@v2
+
+            - name: Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v1
+              with:
+                  node-version: ${{ matrix.node-version }}
+
+            - name: Install
+              run: yarn install --immutable --immutable-cache
+
+            - name: Build
+              run: yarn run build
+
+            - name: Test Transport
+              run: yarn run test:transport --coverage
+
+            - name: Test e2e
+              run: yarn run test:e2e
+
+            - name: Codecov
+              uses: codecov/codecov-action@v1
+              with:
+                  file: packages/ledger-transport-ark/.coverage/lcov.info
+                  flags: unit
+                  fail_ci_if_error: true
